@@ -173,13 +173,8 @@ class DiscoveryManagerMethodChannel : FlutterPlugin, MethodChannel.MethodCallHan
         val selector = MediaRouteSelector.Builder()
             .addControlCategories(categories)
             .build()
-        // ACTIVE_SCAN: newer Android/Play services often return no routes on a
-        // purely passive request until some app forces an active scan (the
-        // "YouTube sees the TV, we don't" pattern).
         router.addCallback(
-            selector,
-            routerCallBack,
-            MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY or MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN
+            selector, routerCallBack, MediaRouter.CALLBACK_FLAG_REQUEST_DISCOVERY
         )
 
         routerCallBack.getCastDevicesMap()
